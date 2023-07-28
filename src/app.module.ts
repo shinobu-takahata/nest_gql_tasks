@@ -3,6 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo/dist/drivers';
 import { ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { TaskModule } from './task/task.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { join } from 'path';
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
+    TaskModule,
   ],
 })
 export class AppModule {}
