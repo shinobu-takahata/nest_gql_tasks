@@ -12,8 +12,10 @@ export class TaskResolver {
   // こっちはgqlの形式の配列で書く
   // 空の配列を返す場合は、'items'
   @Query(() => [TaskModel], { nullable: 'items' })
-  async getTasks(): Promise<Task[]> {
-    return await this.taskService.getTasks();
+  async getTasks(
+    @Args('userId', { type: () => Int }) userId: number,
+  ): Promise<Task[]> {
+    return await this.taskService.getTasks(userId);
   }
 
   @Mutation(() => TaskModel)
