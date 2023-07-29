@@ -1,7 +1,8 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { TaskService } from './task.service';
-import { Task } from './models/task.model';
+import { Task as TaskModel } from './models/task.model';
 import { CreateTaskInput } from './dto/createTask.input';
+import { Task } from '@prisma/client';
 
 @Resolver()
 export class TaskResolver {
@@ -9,13 +10,15 @@ export class TaskResolver {
 
   // こっちはgqlの形式の配列で書く
   // 空の配列を返す場合は、'items'
-  @Query(() => [Task], { nullable: 'items' })
-  getTasks(): Task[] {
-    return this.taskService.getTasks();
+  @Query(() => [TaskModel], { nullable: 'items' })
+  async getTasks(): Promise<Task[]> {
+    return await this.taskService.getTasks();
   }
 
-  @Mutation(() => Task)
-  createTask(@Args('createTaskInput') CreateTaskInput: CreateTaskInput): Task {
-    return this.taskService.createTask(CreateTaskInput);
+  @Mutation(() => TaskModel)
+  async createTask(
+    @Args('createTaskInput') CreateTaskInput: CreateTaskInput,
+  ): Promise<Task> {
+    return await this.taskService.createTask(CreateTaskInput);
   }
 }
