@@ -5,6 +5,7 @@ import { UserModule } from 'src/user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { LocalStrategy } from './strategies/local.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   // デフォルトの認証情報をjwtに設定
@@ -16,6 +17,7 @@ import { LocalStrategy } from './strategies/local.strategy';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  providers: [AuthResolver, AuthService, LocalStrategy],
+  // なんだっけ？importsとどう違う？
+  providers: [AuthResolver, AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}
