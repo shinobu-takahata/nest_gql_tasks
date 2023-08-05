@@ -9,7 +9,7 @@ type Task {
   status: String!
 
   """タスクの説明"""
-  desription: String
+  description: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }

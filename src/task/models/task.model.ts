@@ -19,7 +19,7 @@ export class Task {
     nullable: true,
     description: 'タスクの説明',
   })
-  desription: string;
+  description: string;
 
   @Field()
   createdAt: Date;
